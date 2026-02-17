@@ -30,4 +30,15 @@ const getServices = async(req, res)=>{
     }
 }
 
-module.exports = {createService, getServices}
+//To delete the service
+const deleteService = async (req, res)=>{
+    try{
+        const {id} = req.params;
+        await Service.findByIdAndDelete(id)
+        res.status(204).send("service deleted successfully")
+    } catch (error){
+        res.status(500).json({message: "server error"})
+    }
+}
+
+module.exports = {createService, getServices, deleteService}
