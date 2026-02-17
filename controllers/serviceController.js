@@ -9,7 +9,6 @@ const createService = async (req, res)=>{
             price
         })
         await service.save()
-        //res.status(201).json(service)
         res.status(201).send('Service added successfully')
     }
     catch(error){

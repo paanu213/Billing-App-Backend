@@ -2,6 +2,7 @@ const express = require('express')
 const dotEnv = require('dotenv')
 const mongoose = require('mongoose')
 const serviceRoutes = require('./routes/serviceRoutes')
+const invoiceRoutes = require('./routes/invoiceRoutes')
 const cors = require('cors')
 
 const app = express();
@@ -22,6 +23,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 
 app.use('/services', serviceRoutes)
+app.use('/invoice', invoiceRoutes)
 
 
 
