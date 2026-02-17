@@ -8,9 +8,9 @@ const serviceSchema = new mongoose.Schema({
         required: true
     },
     price: {
-        type: String,
-        rewuired: true
+        type: Number,
+        required: true
     }
 })
 
-module.exports = mongoose.model('service', serviceSchema)
+module.exports = mongoose.model('Service', serviceSchema)

@@ -1,4 +1,4 @@
-const service = require('../models/service')
+const Service = require('../models/Service')
 
 const createService = async (req, res)=>{
     try{
@@ -9,12 +9,25 @@ const createService = async (req, res)=>{
             price
         })
         await service.save()
-        res.status(201).json(service)
+        //res.status(201).json(service)
+        res.status(201).send('Service added successfully')
     }
     catch(error){
-        console.log(`this is an error: ${error}`)
+        console.error(`this is an error: ${error}`)
         res.status(500).json({message: 'server error'})
     }
 }
 
-module.exports = {createService}
+//get services list and details
+const getServices = async(req, res)=>{
+    try{
+        const services = await Service.find()
+        res.status(200).json(services)
+    }
+    catch(error){
+        console.error(`this is an error: ${error}`)
+        res.status(500).json({message: 'server error'})
+    }
+}
+
+module.exports = {createService, getServices}
