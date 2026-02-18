@@ -24,21 +24,30 @@ const invoiceSchema = new mongoose.Schema({
         required: true
     },
     eventDiscount: {
-        type: Number
+        type: Number,
+        default: 0
     },
     finalAmount: {
         type: Number
     },
     advancePaid: {
-        type: Number
+        type: Number,
+        default: 0
     },
-    PendingAmount: {
+    pendingAmount: {
         type: Number
     },
     finalAmountCleared:{
-        type: Boolean
+        type: Boolean,
+        default: false
     },
 
 })
+
+invoiceSchema.methods.calculateAmounts = function () {
+    this.finalAmount = this.eventAmount - this.eventDiscount
+    this.pendingAmount = this.finalAmount - this.advancePaid
+    this.finalAmountCleared = this.pendingAmount <= 0
+}
 
 module.exports = mongoose.model('Invoice', invoiceSchema)
